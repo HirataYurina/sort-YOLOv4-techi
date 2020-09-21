@@ -6,7 +6,7 @@
 # software: PyCharm
 
 import numpy as np
-import scipy
+import scipy.linalg
 
 
 class KalmanFilter:
@@ -57,7 +57,7 @@ class KalmanFilter:
             10 * self._std_weight_velocity * measurement[3]]
         # compute cov
         # except diagonal, elements are zero because the elements of mean are unassociated
-        cov = np.diagonal(np.square(std))
+        cov = np.diag(np.square(std))
         return mean, cov
 
     def predict(self, mean, cov):
@@ -79,7 +79,7 @@ class KalmanFilter:
             self._std_weight_velocity * mean[3],
             1e-5,
             self._std_weight_velocity * mean[3]]
-        noise_cov = np.diagonal(np.square(std_pos))
+        noise_cov = np.diag(np.square(std_pos))
         # transform mean and covariance
         mean = np.matmul(self._transform_matrix, mean)
         cov = np.linalg.multi_dot((self._transform_matrix, cov, self._transform_matrix.T)) + noise_cov
@@ -88,6 +88,13 @@ class KalmanFilter:
 
     def update(self, mean, cov, measurement):
         """start updating process with mean, cov and measurement
+        kalman_gain = PK @ HK.T @ (HK @ PK @ HK.T + RK) ^ -1
+        new_mean = mean + kalman_gain @ mean_diff
+        new_cov = cov - kalman_gain @ HK @ cov
+        PK - the covariance of current blur estimation
+        HK - the transformation matrix that change estimation coordinate to measurement coordinate
+             (x, y, a, h, dx, dy, da, dh) -> (x, y, a, h)
+        RK - the covariance of detection results
 
         Args:
             mean:          [x, y, a, h, dx, dy, da, dh]
@@ -98,8 +105,8 @@ class KalmanFilter:
                            the results of detector
 
         Returns:
-            new_mean
-            new_cov
+            new_mean:      (8,)
+            new_cov:       (8, 8)
 
         """
         # std of measurement
@@ -109,28 +116,32 @@ class KalmanFilter:
             1e-1,
             self._std_weight_position * mean[3]
         ]
-        measure_cov = np.diagonal(np.square(std))
-        mean_middle = np.dot(self._transform_matrix, mean)
-        cov_middle = np.linalg.multi_dot((self._update_matrix, cov, self._update_matrix.T)) + measure_cov
-        # zk - Hk @ xk
-        mean_diff = measurement - mean_middle
+        measure_cov = np.diag(np.square(std))  # (4, 4)
+        mean_middle = np.dot(self._update_matrix, mean)  # (4,)
+        cov_middle = np.linalg.multi_dot((self._update_matrix, cov, self._update_matrix.T)) + measure_cov  # (4, 4)
+        # mean_diff = zk - Hk @ xk
+        mean_diff = measurement - mean_middle  # (4,)
         # kalman gain
         # Ax = B, solve x
         chol_factor, lower = scipy.linalg.cho_factor(cov_middle, lower=True, check_finite=False)
         kalman_gain = scipy.linalg.cho_solve((chol_factor, lower),
                                              np.dot(cov, self._update_matrix.T).T,
-                                             check_finite=False).T
-        new_mean = mean + np.dot(kalman_gain, mean_diff)
-        new_conv = cov - np.linalg.multi_dot((kalman_gain, self._update_matrix, cov))
+                                             check_finite=False).T  # (8, 4)
+        new_mean = mean + np.dot(kalman_gain, mean_diff)  # (8,)
+        new_conv = cov - np.linalg.multi_dot((kalman_gain, self._update_matrix, cov))  # (8, 8)
 
         return new_mean, new_conv
 
     def maha_distance(self,
                       mean,
                       cov,
-                      measures,
-                      only_position=False):
+                      measures):
         """compute maha-distance between optimal estimation by kalman filter and measures.
+
+        maha_distance = (dj - yi).T @ Si ^ -1 @ (dj - yi)
+        yi, Si - track distribution into measurement space
+        dj - the j-th bounding box detection
+
         why i use maha distance?
         Because Euclid distance have a disadvantage that it does not consider correlation between
         params.
@@ -151,9 +162,62 @@ class KalmanFilter:
             cov:            shape is (8, 8)
                             corrected state distribution
             measures:       detection results
-            only_position:  if only position, only compute center of bounding boxes
+            # only_position:  if only position, only compute center of bounding boxes
 
         Returns:
+            maha_distances: a list of maha_distance
 
         """
+        # middle mean
+        mean_middle = np.dot(self._update_matrix, mean)
+        # middle cov
+        std = [
+            self._std_weight_position * mean[3],
+            self._std_weight_position * mean[3],
+            1e-1,
+            self._std_weight_position * mean[3]]
 
+        innovation_cov = np.diag(np.square(std))
+        covariance = np.linalg.multi_dot((self._update_matrix, cov, self._update_matrix.T))
+        cov_middle = covariance + innovation_cov  # (4, 4)
+
+        # get maha distance
+        cholesky_factor, lower = scipy.linalg.cho_factor(cov_middle)
+        cov_middle_inverse = scipy.linalg.cho_solve((cholesky_factor, lower),
+                                                    np.eye(4, 4),
+                                                    check_finite=False)
+
+        maha_distances = []
+        num_measure = np.shape(measures)[0]
+        for i in range(num_measure):
+            measure = measures[i]
+            diff = measure - mean_middle
+            maha_distance = np.linalg.multi_dot((diff.T, cov_middle_inverse, diff))
+            maha_distances.append(maha_distance)
+
+        return maha_distances
+
+
+if __name__ == '__main__':
+    # test my kalman filter
+
+    measurement_ = np.array([100.0, 50.0, 2.0, 30.0])
+
+    filter_ = KalmanFilter()
+
+    # initialize filter
+    mean_init, cov_init = filter_.initiate(measurement=measurement_)
+    # print(mean_init, cov_init.dtype)
+
+    # start predicting
+    mean_pred, cov_pred = filter_.predict(mean_init, cov_init)
+    # print(mean_pred, cov_pred.shape)
+
+    # start updating
+    mean_update, cov_update = filter_.update(mean_pred, cov_pred, measurement_)
+    print(mean_update.shape, cov_update.shape)
+
+    # maha_distance
+    measurement_next = np.expand_dims((99, 60, 2, 30), axis=0)
+    distance = filter_.maha_distance(mean_update, cov_update, measurement_next)
+    print(distance)

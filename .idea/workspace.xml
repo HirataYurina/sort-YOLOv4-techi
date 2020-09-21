@@ -2,13 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c26dc729-f85b-49ef-9b9f-412dbf41834e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/sort-yolov4-techi.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/yolo4-sort-techi.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/kalman_filter.py" beforeDir="false" afterPath="$PROJECT_DIR$/kalman_filter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tracker.py" beforeDir="false" afterPath="$PROJECT_DIR$/tracker.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,7 +34,29 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../deep_sort-master" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyIntegratedToolsModulesConfigurable" />
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.test">
+    <configuration name="kalman_filter" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="sort-yolov4-techi" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/kalman_filter.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="sort-yolov4-techi" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -64,6 +82,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.test" />
+        <item itemvalue="Python.kalman_filter" />
       </list>
     </recent_temporary>
   </component>
@@ -92,6 +111,7 @@
       <workItem from="1600389886961" duration="10188000" />
       <workItem from="1600413522928" duration="698000" />
       <workItem from="1600418401115" duration="3965000" />
+      <workItem from="1600656252190" duration="17067000" />
     </task>
     <servers />
   </component>
@@ -99,40 +119,57 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="555" y="171" key="FileChooserDialogImpl" timestamp="1600418505981">
+    <state x="555" y="171" width="499" height="598" key="FileChooserDialogImpl" timestamp="1600656759139">
       <screen x="0" y="0" width="1549" height="832" />
     </state>
-    <state x="555" y="171" key="FileChooserDialogImpl/0.0.1549.832@0.0.1549.832" timestamp="1600418505981" />
-    <state width="1505" height="377" key="GridCell.Tab.0.bottom" timestamp="1600399827420">
+    <state x="555" y="171" width="499" height="598" key="FileChooserDialogImpl/0.0.1549.832@0.0.1549.832" timestamp="1600656759139" />
+    <state width="1505" height="456" key="GridCell.Tab.0.bottom" timestamp="1600673002717">
       <screen x="0" y="0" width="1549" height="832" />
     </state>
-    <state width="1505" height="377" key="GridCell.Tab.0.bottom/0.0.1549.832@0.0.1549.832" timestamp="1600399827420" />
-    <state width="1505" height="377" key="GridCell.Tab.0.center" timestamp="1600399827420">
+    <state width="1505" height="456" key="GridCell.Tab.0.bottom/0.0.1549.832@0.0.1549.832" timestamp="1600673002717" />
+    <state width="1505" height="456" key="GridCell.Tab.0.center" timestamp="1600673002717">
       <screen x="0" y="0" width="1549" height="832" />
     </state>
-    <state width="1505" height="377" key="GridCell.Tab.0.center/0.0.1549.832@0.0.1549.832" timestamp="1600399827420" />
-    <state width="1505" height="377" key="GridCell.Tab.0.left" timestamp="1600399827420">
+    <state width="1505" height="456" key="GridCell.Tab.0.center/0.0.1549.832@0.0.1549.832" timestamp="1600673002717" />
+    <state width="1505" height="456" key="GridCell.Tab.0.left" timestamp="1600673002717">
       <screen x="0" y="0" width="1549" height="832" />
     </state>
-    <state width="1505" height="377" key="GridCell.Tab.0.left/0.0.1549.832@0.0.1549.832" timestamp="1600399827420" />
-    <state width="1505" height="377" key="GridCell.Tab.0.right" timestamp="1600399827420">
+    <state width="1505" height="456" key="GridCell.Tab.0.left/0.0.1549.832@0.0.1549.832" timestamp="1600673002717" />
+    <state width="1505" height="456" key="GridCell.Tab.0.right" timestamp="1600673002717">
       <screen x="0" y="0" width="1549" height="832" />
     </state>
-    <state width="1505" height="377" key="GridCell.Tab.0.right/0.0.1549.832@0.0.1549.832" timestamp="1600399827420" />
+    <state width="1505" height="456" key="GridCell.Tab.0.right/0.0.1549.832@0.0.1549.832" timestamp="1600673002717" />
+    <state width="1505" height="259" key="GridCell.Tab.1.bottom" timestamp="1600670028329">
+      <screen x="0" y="0" width="1549" height="832" />
+    </state>
+    <state width="1505" height="259" key="GridCell.Tab.1.bottom/0.0.1549.832@0.0.1549.832" timestamp="1600670028329" />
+    <state width="1505" height="259" key="GridCell.Tab.1.center" timestamp="1600670028329">
+      <screen x="0" y="0" width="1549" height="832" />
+    </state>
+    <state width="1505" height="259" key="GridCell.Tab.1.center/0.0.1549.832@0.0.1549.832" timestamp="1600670028329" />
+    <state width="1505" height="259" key="GridCell.Tab.1.left" timestamp="1600670028329">
+      <screen x="0" y="0" width="1549" height="832" />
+    </state>
+    <state width="1505" height="259" key="GridCell.Tab.1.left/0.0.1549.832@0.0.1549.832" timestamp="1600670028329" />
+    <state width="1505" height="259" key="GridCell.Tab.1.right" timestamp="1600670028329">
+      <screen x="0" y="0" width="1549" height="832" />
+    </state>
+    <state width="1505" height="259" key="GridCell.Tab.1.right/0.0.1549.832@0.0.1549.832" timestamp="1600670028329" />
     <state x="284" y="48" key="SettingsEditor" timestamp="1600394464529">
       <screen x="0" y="0" width="1549" height="832" />
     </state>
     <state x="284" y="48" key="SettingsEditor/0.0.1549.832@0.0.1549.832" timestamp="1600394464529" />
-    <state x="398" y="264" key="com.intellij.ide.util.TipDialog" timestamp="1600418485584">
+    <state x="398" y="264" key="com.intellij.ide.util.TipDialog" timestamp="1600656252159">
       <screen x="0" y="0" width="1549" height="832" />
     </state>
-    <state x="398" y="264" key="com.intellij.ide.util.TipDialog/0.0.1549.832@0.0.1549.832" timestamp="1600418485584" />
+    <state x="398" y="264" key="com.intellij.ide.util.TipDialog/0.0.1549.832@0.0.1549.832" timestamp="1600656252159" />
     <state x="437" y="152" width="672" height="678" key="search.everywhere.popup" timestamp="1600420615151">
       <screen x="0" y="0" width="1549" height="832" />
     </state>
     <state x="437" y="152" width="672" height="678" key="search.everywhere.popup/0.0.1549.832@0.0.1549.832" timestamp="1600420615151" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/sort_yolov4_techi$test.coverage" NAME="test Coverage Results" MODIFIED="1600399822185" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/sort_yolov4_techi$test.coverage" NAME="test Coverage Results" MODIFIED="1600672998975" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/sort_yolov4_techi$kalman_filter.coverage" NAME="kalman_filter Coverage Results" MODIFIED="1600671267765" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
