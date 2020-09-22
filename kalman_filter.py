@@ -32,9 +32,9 @@ class KalmanFilter:
 
         Args:
             measurement: bounding boxes (x, y, a, h)
-            (x, y) center of bounding boxes
-            a, aspect ratio
-            h, height of boxes
+                         (x, y) center of bounding boxes
+                         a, aspect ratio
+                         h, height of boxes
 
         Returns:
             mean: initial mean

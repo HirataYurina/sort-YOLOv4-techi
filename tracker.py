@@ -71,13 +71,13 @@ def matching_cascade(tracks,
        if it has not been matched, the age is added 1.
 
     Args:
-        tracks:             a list
-        detections:         a list
-        kalman_filter:
-        age:
-        init_age:
-        gating_threshold:
-        iou_threshold:
+        tracks:             a list of trackers    [x, y, a, h]
+        detections:         a list of detections  [x, y, a, h]
+        kalman_filter:      KalmanFilter object
+        age:                the max age of confirmed trackers
+        init_age:           the max age of tentative(unconfirmed) trackers
+        gating_threshold:   the threshold of maha_distance
+        iou_threshold:      iou threshold of iou matching
 
     Returns:
         new_tracks
