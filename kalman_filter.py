@@ -218,6 +218,6 @@ if __name__ == '__main__':
     print(mean_update.shape, cov_update.shape)
 
     # maha_distance
-    measurement_next = np.expand_dims((99, 60, 2, 30), axis=0)
+    measurement_next = np.expand_dims(measurement_, axis=0)
     distance = filter_.maha_distance(mean_update, cov_update, measurement_next)
     print(distance)
