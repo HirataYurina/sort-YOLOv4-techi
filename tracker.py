@@ -6,7 +6,7 @@
 # software: PyCharm
 
 import numpy as np
-from utils import get_iou
+from utils import get_iou, create_tracker
 
 
 """
@@ -55,6 +55,7 @@ class Tracker:
 def matching_cascade(tracks,
                      detections,
                      kalman_filter,
+                     label_index,
                      age=30,
                      init_age=3,
                      gating_threshold=9.4877,
@@ -69,11 +70,19 @@ def matching_cascade(tracks,
        if it has been matched, the age is set to 0.
        and we need to update the location of bounding boxes that have been matched.
        if it has not been matched, the age is added 1.
+    4. How to match targets?
+                                                           predict by linear model
+                            tracking list(previous frame) -----------------------> tracking list(current frame)
+                                                                                                |
+                                                                                                |
+                                                            if min(distance) < 9.4877           V
+       update target by detection(measurement) that matched <-----------------------   compute maha distance
 
     Args:
         tracks:             a list of trackers    [x, y, a, h]
         detections:         a list of detections  [x, y, a, h]
         kalman_filter:      KalmanFilter object
+        label_index:        the label that is monotonically increased
         age:                the max age of confirmed trackers
         init_age:           the max age of tentative(unconfirmed) trackers
         gating_threshold:   the threshold of maha_distance
@@ -94,6 +103,7 @@ def matching_cascade(tracks,
         # the last frame optimal estimation
         mean = tracker.mean
         cov = tracker.cov
+
         # predict the current estimation by transformation matrix
         mean_pred, cov_pred = kalman_filter.predict(mean, cov)
         tracker.update(mean_pred, cov_pred, None)
@@ -101,33 +111,34 @@ def matching_cascade(tracks,
         # age = age + 1
         tracker.predict()
 
-        if tracker.tentative and tracker.age <= init_age:
-            maha_distances = kalman_filter.maha_distance(mean_pred, cov_pred, detections)
-            min_distance = np.min(maha_distances)
-            min_arg = np.argmin(maha_distances)
-            if min_distance <= gating_threshold:
-                # 1.set tracker.tentative = False and age = 0
-                # 2.update distribution and measurement
-                # 3.delete this detection in detections
-                tracker.matching()
-                # update prediction results by kalman filter
-                new_mean, new_cov = kalman_filter.update(mean_pred, cov_pred, detections[min_arg])
-                tracker.update(new_mean, new_cov, detections[min_arg])
-                detections.pop(min_arg)
+        if len(detections) > 0:
+            if tracker.tentative and tracker.age <= init_age:
+                maha_distances = kalman_filter.maha_distance(mean_pred, cov_pred, detections)
+                min_distance = np.min(maha_distances)
+                min_arg = np.argmin(maha_distances)
+                if min_distance <= gating_threshold:
+                    # 1.set tracker.tentative = False and age = 0
+                    # 2.update distribution and measurement
+                    # 3.delete this detection in detections
+                    tracker.matching()
+                    # update prediction results by kalman filter
+                    new_mean, new_cov = kalman_filter.update(mean_pred, cov_pred, detections[min_arg])
+                    tracker.update(new_mean, new_cov, detections[min_arg])
+                    detections.pop(min_arg)
 
-        if (not tracker.tentative) and tracker.age <= age:
-            maha_distances = kalman_filter.maha_distance(mean_pred, cov_pred, detections)
-            min_distance = np.min(maha_distances)
-            min_arg = np.argmin(maha_distances)
-            if min_distance <= gating_threshold:
-                # 1.set tracker.tentative = False and age = 0
-                # 2.update distribution and measurement
-                # 3.delete this detection in detections
-                tracker.matching()
-                # update prediction results by kalman filter
-                new_mean, new_cov = kalman_filter.update(mean_pred, cov_pred, detections[min_arg])
-                tracker.update(new_mean, new_cov, detections[min_arg])
-                detections.pop(min_arg)
+            if (not tracker.tentative) and tracker.age <= age:
+                maha_distances = kalman_filter.maha_distance(mean_pred, cov_pred, detections)
+                min_distance = np.min(maha_distances)
+                min_arg = np.argmin(maha_distances)
+                if min_distance <= gating_threshold:
+                    # 1.set tracker.tentative = False and age = 0
+                    # 2.update distribution and measurement
+                    # 3.delete this detection in detections
+                    tracker.matching()
+                    # update prediction results by kalman filter
+                    new_mean, new_cov = kalman_filter.update(mean_pred, cov_pred, detections[min_arg])
+                    tracker.update(new_mean, new_cov, detections[min_arg])
+                    detections.pop(min_arg)
 
         if tracker.tentative and tracker.age > init_age:
             delete_index.append(i)
@@ -136,9 +147,7 @@ def matching_cascade(tracks,
             delete_index.append(i)
 
     # delete trackers
-
     new_tracks = []
-
     delete_set = set(delete_index)
     total_set = set(np.arange(num_trackers))
     remain_set = total_set - delete_set
@@ -167,12 +176,10 @@ def matching_cascade(tracks,
 
     # initialize unmatched detections
     if len(detections) > 0:
-        for detection in detections:
+        for t, detection in enumerate(detections):
+            label_index = label_index + t + 1
             mean_init, cov_init = kalman_filter.initiate(detection)
-            new_tracker = Tracker()
-            new_tracker.mean = mean_init
-            new_tracker.cov = cov_init
-            new_tracker.measurement = detection
+            new_tracker = create_tracker(mean_init, cov_init, detection, label_index)
             new_tracks.append(new_tracker)
 
-    return new_tracks
+    return new_tracks, label_index

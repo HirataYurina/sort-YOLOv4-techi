@@ -39,7 +39,7 @@ h - height of bounding box.
    cov'=Fk*cov*Fk^T
    $$
 
-3. Compute maha distance between prediction of this frame and detection of this frame.
+3. Compute maha distance between **prediction of this frame** and detection of this frame.
 
 4. Assign matched detection to target that we track.
 
