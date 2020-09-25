@@ -7,7 +7,7 @@
 
 import numpy as np
 from PIL import Image
-from tracker import Tracker
+import tracker
 
 
 def get_iou(measure, detections):
@@ -21,6 +21,7 @@ def get_iou(measure, detections):
         ious
 
     """
+    detections = np.array(detections)
     measure[2] = measure[3] / measure[2]
     detections[..., 2] = detections[..., 3] / detections[..., 2]
 
@@ -57,21 +58,18 @@ def letterbox_image(image, size):
 
 def create_tracker(mean,
                    cov,
-                   detection,
-                   label_index):
+                   detection):
     """create new tracker"""
 
-    new_tracker = Tracker()
+    new_tracker = tracker.MyTracker()
     new_tracker.mean = mean
     new_tracker.cov = cov
     new_tracker.measurement = detection
-    # set label of this new tracker
-    new_tracker.label(label_index)
     return new_tracker
 
 
 def box2xyah(detections):
-    """convert [x_min, y_min, x_max, y_max] to [x_center, y_center, aspect_ratio, height]
+    """convert [y_min, x_min, x_max, y_max] to [x_center, y_center, aspect_ratio, height]
 
     Args:
         detections: the shape is (n, 4)
@@ -82,14 +80,14 @@ def box2xyah(detections):
     """
     detections = np.reshape(detections, newshape=(-1, 4))
     center = (detections[..., 0:2] + detections[..., 2:4]) / 2  # (n, 2)
-    boxes_wh = detections[..., 2:4] - detections[..., 0:2]  # (n, 2)
-    aspect_ratio = boxes_wh[1] / boxes_wh[0]  # (n,)
-    height = detections[..., -1]
+    boxes_hw = detections[..., 2:4] - detections[..., 0:2]  # (n, 2)
+    aspect_ratio = boxes_hw[..., 1] / boxes_hw[..., 0]  # (n,)
+    height = boxes_hw[..., 0]
 
     aspect_ratio = np.reshape(aspect_ratio, newshape=(-1, 1))
     height = np.reshape(height, newshape=(-1, 1))
 
-    new_detections = np.concatenate([center, aspect_ratio, height], axis=-1)
+    new_detections = np.concatenate([center[..., ::-1], aspect_ratio, height], axis=-1)
     return new_detections
 
 
@@ -106,7 +104,7 @@ def xyah2box(target):
     """
     height = target[3]
     ratio = target[2]
-    width = height / ratio
+    width = height * ratio
     center = target[0:2]
     wh = np.array([width, height])
     xy_min = center - wh / 2

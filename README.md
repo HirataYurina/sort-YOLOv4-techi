@@ -7,7 +7,7 @@
 The detector can be any model that can detect objects you want to track , such as person, car or animal.
 Outputs of detector should be: [x, y, a, h].
 x, y - the center of bounding box;
-a - aspect ratio(h / w);
+a - aspect ratio(w / h)(**if you set ratio=h/w, the maha distance will be larger**);
 h - height of bounding box.
 
 ### Tracking Method

@@ -26,7 +26,7 @@ chi2inv95 = {
     9: 16.919}
 
 
-class Tracker:
+class MyTracker:
 
     def __init__(self):
         self.age = 0
@@ -56,7 +56,7 @@ def matching_cascade(tracks,
                      detections,
                      kalman_filter,
                      label_index,
-                     age=30,
+                     age=3,
                      init_age=3,
                      gating_threshold=9.4877,
                      iou_threshold=0.3):
@@ -103,10 +103,11 @@ def matching_cascade(tracks,
         # the last frame optimal estimation
         mean = tracker.mean
         cov = tracker.cov
+        measure = tracker.measurement
 
         # predict the current estimation by transformation matrix
         mean_pred, cov_pred = kalman_filter.predict(mean, cov)
-        tracker.update(mean_pred, cov_pred, None)
+        tracker.update(mean_pred, cov_pred, measure)
 
         # age = age + 1
         tracker.predict()
@@ -120,13 +121,17 @@ def matching_cascade(tracks,
                     # 1.set tracker.tentative = False and age = 0
                     # 2.update distribution and measurement
                     # 3.delete this detection in detections
+                    # 4.label this target
                     tracker.matching()
                     # update prediction results by kalman filter
                     new_mean, new_cov = kalman_filter.update(mean_pred, cov_pred, detections[min_arg])
                     tracker.update(new_mean, new_cov, detections[min_arg])
                     detections.pop(min_arg)
+                    # set label
+                    label_index += 1
+                    tracker.label(label_index)
 
-            if (not tracker.tentative) and tracker.age <= age:
+            elif (not tracker.tentative) and tracker.age <= age:
                 maha_distances = kalman_filter.maha_distance(mean_pred, cov_pred, detections)
                 min_distance = np.min(maha_distances)
                 min_arg = np.argmin(maha_distances)
@@ -173,13 +178,15 @@ def matching_cascade(tracks,
                     new_mean, new_cov = kalman_filter.update(mean_, cov_, detections[max_arg])
                     tracker.update(new_mean, new_cov, detections[max_arg])
                     detections.pop(max_arg)
+                    # set label
+                    label_index += 1
+                    tracker.label(label_index)
 
     # initialize unmatched detections
     if len(detections) > 0:
         for t, detection in enumerate(detections):
-            label_index = label_index + t + 1
             mean_init, cov_init = kalman_filter.initiate(detection)
-            new_tracker = create_tracker(mean_init, cov_init, detection, label_index)
+            new_tracker = create_tracker(mean_init, cov_init, detection)
             new_tracks.append(new_tracker)
 
     return new_tracks, label_index

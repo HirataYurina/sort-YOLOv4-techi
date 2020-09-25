@@ -41,13 +41,14 @@ def main(video_path,
 
     # tracking list
     tracking_list = []
-    label_index = 0
+    label_count = 0
     is_first_frame = True
 
     while True:
         success, frame = capture.read()
 
         if not success:
+            capture.release()
             break
 
         frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
@@ -60,10 +61,13 @@ def main(video_path,
         image_shape = tf.constant(image_shape, dtype=tf.float32)
 
         # detect image
-        boxes, _, classes = detector.detect(image_constant, image_shape)
-        boxes = boxes.numpy
+        results = detector.detect(image_constant, image_shape)
+        pred_results = []
+        for key, value in results.items():
+            pred_results.append(value)
+        boxes = pred_results[0].numpy()
         # scores = scores.numpy
-        classes = classes.numpy
+        classes = pred_results[2].numpy()
 
         # find tracking targets
         track_id = np.where(classes == track_target)[0]
@@ -71,25 +75,24 @@ def main(video_path,
         num_tracks = len(track_boxes)
         if num_tracks > 0:
             track_boxes = box2xyah(track_boxes)
+            track_boxes = [track_box for track_box in track_boxes]
+
+        if not is_first_frame:
+            # start tracking
+            tracking_list, label_count = matching_cascade(tracking_list, track_boxes,
+                                                          kalman_filter, label_count)
 
         if is_first_frame and (num_tracks > 0):
             is_first_frame = False
 
             for i in range(num_tracks):
-                label_index = label_index + i + 1
                 # initialize first frame
                 mean_init, cov_init = kalman_filter.initiate(measurement=track_boxes[i])
                 # create tracker
                 new_tracker = create_tracker(mean=mean_init,
                                              cov=cov_init,
-                                             detection=track_boxes[i],
-                                             label_index=label_index)
+                                             detection=track_boxes[i])
                 tracking_list.append(new_tracker)
-
-        if not is_first_frame:
-            # start tracking
-            tracking_list, label_index = matching_cascade(tracking_list, track_boxes,
-                                                          kalman_filter, label_index)
 
         if visualize:
             # visulize results
@@ -100,3 +103,11 @@ def main(video_path,
             if key == 27:
                 capture.release()
                 break
+
+
+if __name__ == '__main__':
+
+    # test my algorithm
+    test_video_path = './video/woman.avi'
+    model_path = r'F:\百度云下载\2019深度学习\2020代码\yolo-predict-tf2.X-techi\saved_model_coco'
+    main(test_video_path, model_path, visualize=True)

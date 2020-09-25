@@ -17,11 +17,11 @@ class Detector:
     def generate_model(self):
         # create model
         model = tf.saved_model.load(self.model_path)
-        model = model.signatures['serving_default']
         return model
 
     def detect(self, inputs, image_shape):
         # inference
-        boxes, scores, classes = self.model(input_2=inputs,
-                                            input_3=image_shape)
-        return boxes, scores, classes
+        model = self.model.signatures['serving_default']
+        results = model(input_2=inputs,
+                        input_3=image_shape)
+        return results

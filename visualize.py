@@ -18,7 +18,7 @@ def visualize_results(tracking_list,
     """
 
     font_scale = cv2.getFontScaleFromHeight(fontFace=6,
-                                            pixelHeight=height) / 20
+                                            pixelHeight=int(height)) / 20
 
     num_tracker = len(tracking_list)
 
@@ -30,14 +30,20 @@ def visualize_results(tracking_list,
             label = tracker.index
 
             if not tentative:
+                # print(label)
                 # visualize bounding box and label
                 retval, _ = cv2.getTextSize(str(label), 6, font_scale, 2)
                 origin1 = measurement[0:2]
                 origin2 = origin1 + retval
                 text_origin = origin1 + np.array([0, retval[1]])
-                cv2.rectangle(img, origin1, origin2, (255, 192, 203), thickness=-1)
-                cv2.putText(img, str(label), text_origin, 6, font_scale, (255, 255, 255), 1)
+                cv2.rectangle(img, (origin1[0], origin1[1]),
+                              (origin2[0], origin2[1]), (255, 192, 203),
+                              thickness=-1)
+                cv2.putText(img, str(label), (text_origin[0], text_origin[1]),
+                            6, font_scale, (255, 255, 255), 1)
 
-                cv2.rectangle(img, measurement[0:2], measurement[2:4], (0, 0, 255), thickness=2)
+                cv2.rectangle(img, (measurement[0], measurement[1]),
+                              (measurement[2], measurement[3]), (0, 0, 255),
+                              thickness=2)
 
     return img
