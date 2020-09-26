@@ -13,6 +13,7 @@ from PIL import Image
 from utils import letterbox_image, create_tracker, box2xyah
 import tensorflow as tf
 from kalman_filter import KalmanFilter
+# from official_code.kalman_filter import KalmanFilter
 from visualize import visualize_results
 
 # the input size
@@ -56,7 +57,7 @@ def main(video_path,
         frame_pil = Image.fromarray(np.uint8(frame))
         new_frame = letterbox_image(frame_pil, INPUT_SIZE)
         image_array = np.expand_dims(np.array(new_frame, dtype='float32') / 255.0, axis=0)
-        image_shape = np.array([height, width], dtype='float32')
+        image_shape = np.expand_dims(np.array([height, width], dtype='float32'), axis=0)
         image_constant = tf.constant(image_array, dtype=tf.float32)
         image_shape = tf.constant(image_shape, dtype=tf.float32)
 
@@ -108,6 +109,6 @@ def main(video_path,
 if __name__ == '__main__':
 
     # test my algorithm
-    test_video_path = './video/woman.avi'
-    model_path = r'F:\百度云下载\2019深度学习\2020代码\yolo-predict-tf2.X-techi\saved_model_coco'
+    test_video_path = './video/person.avi'
+    model_path = './saved_model_coco'
     main(test_video_path, model_path, visualize=True)

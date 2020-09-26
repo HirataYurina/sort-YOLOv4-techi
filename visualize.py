@@ -6,8 +6,15 @@
 # software: PyCharm
 
 import cv2
-from utils import xyah2box
+from utils import xyah2box, transparent_region, judge_invasion
 import numpy as np
+import copy
+
+
+POINT1 = np.array((64, 235))
+POINT2 = np.array((361, 166))
+POINT3 = np.array((528, 256))
+POINT4 = np.array((185, 361))
 
 
 def visualize_results(tracking_list,
@@ -16,15 +23,28 @@ def visualize_results(tracking_list,
     """visualize the tracking results.
        we only visualize the targets that have been confirmed.
     """
-
+    img_copy = copy.deepcopy(img)
+    img = transparent_region(img,
+                             POINT1, POINT2, POINT3, POINT4,
+                             (0, 0, 255))
     font_scale = cv2.getFontScaleFromHeight(fontFace=6,
-                                            pixelHeight=int(height)) / 20
+                                            pixelHeight=int(height)) / 25
 
     num_tracker = len(tracking_list)
 
     if num_tracker > 0:
         for tracker in tracking_list:
             tentative = tracker.tentative
+
+            # if target is in the danger region, system givea an alarm.
+            center = tracker.measurement[:2]
+            invasion = judge_invasion(center, POINT1, POINT2, POINT3, POINT4)
+            print(invasion)
+            if invasion:
+                img = transparent_region(img_copy,
+                                         POINT1, POINT2, POINT3, POINT4,
+                                         (255, 0, 0))
+
             measurement = xyah2box(tracker.measurement)
             measurement = measurement.astype('int')
             label = tracker.index

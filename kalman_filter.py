@@ -135,7 +135,8 @@ class KalmanFilter:
     def maha_distance(self,
                       mean,
                       cov,
-                      measures):
+                      measures,
+                      only_position=True):
         """compute maha-distance between optimal estimation by kalman filter and measures.
 
         maha_distance = (dj - yi).T @ Si ^ -1 @ (dj - yi)
@@ -162,7 +163,7 @@ class KalmanFilter:
             cov:            shape is (8, 8)
                             corrected state distribution
             measures:       detection results
-            # only_position:  if only position, only compute center of bounding boxes
+            only_position:  if only position, only compute center of bounding boxes
 
         Returns:
             maha_distances: a list of maha_distance
@@ -180,11 +181,19 @@ class KalmanFilter:
         innovation_cov = np.diag(np.square(std))
         covariance = np.linalg.multi_dot((self._update_matrix, cov, self._update_matrix.T))
         cov_middle = covariance + innovation_cov  # (4, 4)
+        # A @ A^-1 = identity_matrix
+        identity_matrix = np.eye(4, 4)
+
+        if only_position:
+            mean_middle = mean_middle[..., :2]
+            cov_middle = cov_middle[:2, :2]
+            measures = np.array(measures)[..., :2]
+            identity_matrix = np.eye(2, 2)
 
         # get maha distance
         cholesky_factor, lower = scipy.linalg.cho_factor(cov_middle)
         cov_middle_inverse = scipy.linalg.cho_solve((cholesky_factor, lower),
-                                                    np.eye(4, 4),
+                                                    identity_matrix,
                                                     check_finite=False)
 
         maha_distances = []

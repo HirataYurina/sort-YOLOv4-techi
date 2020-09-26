@@ -2,11 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c26dc729-f85b-49ef-9b9f-412dbf41834e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sort-yolov4-techi.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sort-yolov4-techi.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/detector.py" beforeDir="false" afterPath="$PROJECT_DIR$/detector.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tracker.py" beforeDir="false" afterPath="$PROJECT_DIR$/tracker.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kalman_filter.py" beforeDir="false" afterPath="$PROJECT_DIR$/kalman_filter.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/video_pred.py" beforeDir="false" afterPath="$PROJECT_DIR$/video_pred.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/visualize.py" beforeDir="false" afterPath="$PROJECT_DIR$/visualize.py" afterDir="false" />
@@ -36,19 +36,21 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../deep_sort-master" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/images" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\危险源识别系统\yolo4-sort-techi\images" />
       <recent name="F:\百度云下载\2019深度学习\2020代码\sort-yolov4-techi\video" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\危险源识别系统\yolo4-sort-techi\video" />
       <recent name="F:\百度云下载\2019深度学习\2020代码\sort-yolov4-techi\official_code" />
     </key>
   </component>
   <component name="RunManager" selected="Python.video_pred">
-    <configuration name="official_code" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="get_point" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="sort-yolov4-techi" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -61,7 +63,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="F:\百度云下载\2019深度学习\2020代码\sort-yolov4-techi\official_code\official_code.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/get_point.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -70,7 +72,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="img2video" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="sort-yolov4-techi" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -83,7 +85,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/img2video.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -92,7 +94,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="test1" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="utils" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="sort-yolov4-techi" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -105,7 +107,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test1.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/utils.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -161,10 +163,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.video_pred" />
+        <item itemvalue="Python.utils" />
+        <item itemvalue="Python.get_point" />
+        <item itemvalue="Python.img2video" />
         <item itemvalue="Python.visualize" />
-        <item itemvalue="Python.test" />
-        <item itemvalue="Python.test1" />
-        <item itemvalue="Python.official_code" />
       </list>
     </recent_temporary>
   </component>
@@ -198,6 +200,8 @@
       <workItem from="1600821819340" duration="17831000" />
       <workItem from="1600847017381" duration="33000" />
       <workItem from="1600994254183" duration="23183000" />
+      <workItem from="1601039981310" duration="3170000" />
+      <workItem from="1601083689507" duration="16040000" />
     </task>
     <servers />
   </component>
@@ -205,99 +209,91 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="543" y="234" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1601040859912">
+      <screen x="0" y="0" width="1603" height="862" />
+    </state>
+    <state x="543" y="234" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1603.862@0.0.1603.862" timestamp="1601040859912" />
     <state width="945" height="438" key="DebuggerActiveHint" timestamp="1601025142162">
       <screen x="0" y="0" width="1549" height="832" />
     </state>
     <state width="945" height="438" key="DebuggerActiveHint/0.0.1549.832@0.0.1549.832" timestamp="1601025142162" />
-    <state x="555" y="171" width="499" height="598" key="FileChooserDialogImpl" timestamp="1601019735388">
-      <screen x="0" y="0" width="1549" height="832" />
+    <state x="574" y="177" width="499" height="598" key="FileChooserDialogImpl" timestamp="1601083808766">
+      <screen x="0" y="0" width="1603" height="862" />
     </state>
     <state x="555" y="171" width="499" height="598" key="FileChooserDialogImpl/0.0.1549.832@0.0.1549.832" timestamp="1601019735388" />
-    <state width="1505" height="631" key="GridCell.Tab.0.bottom" timestamp="1601025998450">
-      <screen x="0" y="0" width="1549" height="832" />
+    <state x="574" y="177" key="FileChooserDialogImpl/0.0.1603.862@0.0.1603.862" timestamp="1601083808766" />
+    <state width="1559" height="651" key="GridCell.Tab.0.bottom" timestamp="1601114439281">
+      <screen x="0" y="0" width="1603" height="862" />
     </state>
     <state width="1505" height="631" key="GridCell.Tab.0.bottom/0.0.1549.832@0.0.1549.832" timestamp="1601025998450" />
-    <state width="1505" height="631" key="GridCell.Tab.0.center" timestamp="1601025998450">
-      <screen x="0" y="0" width="1549" height="832" />
+    <state width="1559" height="651" key="GridCell.Tab.0.bottom/0.0.1603.862@0.0.1603.862" timestamp="1601114439281" />
+    <state width="1559" height="651" key="GridCell.Tab.0.center" timestamp="1601114439281">
+      <screen x="0" y="0" width="1603" height="862" />
     </state>
     <state width="1505" height="631" key="GridCell.Tab.0.center/0.0.1549.832@0.0.1549.832" timestamp="1601025998450" />
-    <state width="1505" height="631" key="GridCell.Tab.0.left" timestamp="1601025998450">
-      <screen x="0" y="0" width="1549" height="832" />
+    <state width="1559" height="651" key="GridCell.Tab.0.center/0.0.1603.862@0.0.1603.862" timestamp="1601114439281" />
+    <state width="1559" height="651" key="GridCell.Tab.0.left" timestamp="1601114439281">
+      <screen x="0" y="0" width="1603" height="862" />
     </state>
     <state width="1505" height="631" key="GridCell.Tab.0.left/0.0.1549.832@0.0.1549.832" timestamp="1601025998450" />
-    <state width="1505" height="631" key="GridCell.Tab.0.right" timestamp="1601025998450">
-      <screen x="0" y="0" width="1549" height="832" />
+    <state width="1559" height="651" key="GridCell.Tab.0.left/0.0.1603.862@0.0.1603.862" timestamp="1601114439281" />
+    <state width="1559" height="651" key="GridCell.Tab.0.right" timestamp="1601114439281">
+      <screen x="0" y="0" width="1603" height="862" />
     </state>
     <state width="1505" height="631" key="GridCell.Tab.0.right/0.0.1549.832@0.0.1549.832" timestamp="1601025998450" />
-    <state width="1505" height="641" key="GridCell.Tab.1.bottom" timestamp="1601025403801">
-      <screen x="0" y="0" width="1549" height="832" />
+    <state width="1559" height="651" key="GridCell.Tab.0.right/0.0.1603.862@0.0.1603.862" timestamp="1601114439281" />
+    <state width="1559" height="274" key="GridCell.Tab.1.bottom" timestamp="1601114439280">
+      <screen x="0" y="0" width="1603" height="862" />
     </state>
     <state width="1505" height="641" key="GridCell.Tab.1.bottom/0.0.1549.832@0.0.1549.832" timestamp="1601025403801" />
-    <state width="1505" height="641" key="GridCell.Tab.1.center" timestamp="1601025403801">
-      <screen x="0" y="0" width="1549" height="832" />
+    <state width="1559" height="274" key="GridCell.Tab.1.bottom/0.0.1603.862@0.0.1603.862" timestamp="1601114439280" />
+    <state width="1559" height="274" key="GridCell.Tab.1.center" timestamp="1601114439279">
+      <screen x="0" y="0" width="1603" height="862" />
     </state>
     <state width="1505" height="641" key="GridCell.Tab.1.center/0.0.1549.832@0.0.1549.832" timestamp="1601025403801" />
-    <state width="1505" height="641" key="GridCell.Tab.1.left" timestamp="1601025403801">
-      <screen x="0" y="0" width="1549" height="832" />
+    <state width="1559" height="274" key="GridCell.Tab.1.center/0.0.1603.862@0.0.1603.862" timestamp="1601114439279" />
+    <state width="1559" height="274" key="GridCell.Tab.1.left" timestamp="1601114439279">
+      <screen x="0" y="0" width="1603" height="862" />
     </state>
     <state width="1505" height="641" key="GridCell.Tab.1.left/0.0.1549.832@0.0.1549.832" timestamp="1601025403801" />
-    <state width="1505" height="641" key="GridCell.Tab.1.right" timestamp="1601025403801">
-      <screen x="0" y="0" width="1549" height="832" />
+    <state width="1559" height="274" key="GridCell.Tab.1.left/0.0.1603.862@0.0.1603.862" timestamp="1601114439279" />
+    <state width="1559" height="274" key="GridCell.Tab.1.right" timestamp="1601114439280">
+      <screen x="0" y="0" width="1603" height="862" />
     </state>
     <state width="1505" height="641" key="GridCell.Tab.1.right/0.0.1549.832@0.0.1549.832" timestamp="1601025403801" />
-    <state x="284" y="48" key="SettingsEditor" timestamp="1600997900625">
-      <screen x="0" y="0" width="1549" height="832" />
+    <state width="1559" height="274" key="GridCell.Tab.1.right/0.0.1603.862@0.0.1603.862" timestamp="1601114439280" />
+    <state x="294" y="50" key="SettingsEditor" timestamp="1601040068743">
+      <screen x="0" y="0" width="1603" height="862" />
     </state>
     <state x="284" y="48" key="SettingsEditor/0.0.1549.832@0.0.1549.832" timestamp="1600997900625" />
-    <state x="398" y="264" key="com.intellij.ide.util.TipDialog" timestamp="1600994255902">
-      <screen x="0" y="0" width="1549" height="832" />
+    <state x="294" y="50" key="SettingsEditor/0.0.1603.862@0.0.1603.862" timestamp="1601040068743" />
+    <state x="412" y="274" key="com.intellij.ide.util.TipDialog" timestamp="1601083750837">
+      <screen x="0" y="0" width="1603" height="862" />
     </state>
     <state x="398" y="264" key="com.intellij.ide.util.TipDialog/0.0.1549.832@0.0.1549.832" timestamp="1600994255902" />
-    <state x="334" y="152" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1601014273440">
-      <screen x="0" y="0" width="1549" height="832" />
+    <state x="412" y="274" key="com.intellij.ide.util.TipDialog/0.0.1603.862@0.0.1603.862" timestamp="1601083750837" />
+    <state x="346" y="157" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1601112963188">
+      <screen x="0" y="0" width="1603" height="862" />
     </state>
     <state x="334" y="152" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1549.832@0.0.1549.832" timestamp="1601014273440" />
+    <state x="346" y="157" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1603.862@0.0.1603.862" timestamp="1601112963188" />
     <state x="463" y="149" width="623" height="534" key="find.popup" timestamp="1601025375966">
       <screen x="0" y="0" width="1549" height="832" />
     </state>
     <state x="463" y="149" width="623" height="534" key="find.popup/0.0.1549.832@0.0.1549.832" timestamp="1601025375966" />
-    <state x="437" y="152" width="672" height="678" key="search.everywhere.popup" timestamp="1600759084266">
-      <screen x="0" y="0" width="1549" height="832" />
+    <state x="452" y="157" width="696" height="703" key="search.everywhere.popup" timestamp="1601103792898">
+      <screen x="0" y="0" width="1603" height="862" />
     </state>
     <state x="437" y="152" width="672" height="678" key="search.everywhere.popup/0.0.1549.832@0.0.1549.832" timestamp="1600759084266" />
+    <state x="452" y="157" width="696" height="703" key="search.everywhere.popup/0.0.1603.862@0.0.1603.862" timestamp="1601103792898" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/visualize.py</url>
-          <line>38</line>
-          <option name="timeStamp" value="13" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/visualize.py</url>
-          <line>41</line>
-          <option name="timeStamp" value="14" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/tracker.py</url>
-          <line>191</line>
-          <option name="timeStamp" value="16" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/tracker.py</url>
-          <line>109</line>
-          <option name="timeStamp" value="17" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/video_pred.py</url>
-          <line>96</line>
-          <option name="timeStamp" value="18" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/visualize.py</url>
-          <line>22</line>
-          <option name="timeStamp" value="19" />
+          <url>file://$PROJECT_DIR$/utils.py</url>
+          <line>167</line>
+          <option name="timeStamp" value="24" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -305,7 +301,11 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/sort_yolov4_techi$test1.coverage" NAME="test1 Coverage Results" MODIFIED="1600760468292" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/sort_yolov4_techi$test.coverage" NAME="test Coverage Results" MODIFIED="1600837770576" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/yolo4_sort_techi$img2video.coverage" NAME="img2video Coverage Results" MODIFIED="1601041299281" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/sort_yolov4_techi$visualize.coverage" NAME="visualize Coverage Results" MODIFIED="1601014276176" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/yolo4_sort_techi$get_point.coverage" NAME="get_point Coverage Results" MODIFIED="1601103172077" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/yolo4_sort_techi$utils.coverage" NAME="utils Coverage Results" MODIFIED="1601103302406" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/yolo4_sort_techi$video_pred.coverage" NAME="video_pred Coverage Results" MODIFIED="1601114186595" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/sort_yolov4_techi$video_pred.coverage" NAME="video_pred Coverage Results" MODIFIED="1601025768379" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/sort_yolov4_techi$kalman_filter.coverage" NAME="kalman_filter Coverage Results" MODIFIED="1600738108873" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
