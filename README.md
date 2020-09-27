@@ -69,7 +69,30 @@ But, if motion uncertainty is big, maha distance is not stable.
 
 So, DeepSort add a performance descriptor to promote tracking stability.
 
-### 4. ToDO
+### 4. How to Use
+
+1. Set your own test_video_path, model_path and target.
+
+   ```pyt
+   test_video_path = 'rtsp://admin:techi@192.168.X.XX/Streaming/Channels/1'  # set your own video path
+   model_path = './saved_model_coco'  # set your own model path
+   ```
+
+2. Modify video_pred.py.
+
+   ```pyt
+   # modify code and set your own target
+   # track_target: 0-person; 1-bicycle; 2-car; 7-truck
+   main(test_video_path, model_path, track_target=0, visualize=True)
+   ```
+
+3. Results.
+
+   <img src="/images/tracking1.png" width="500px">
+
+   <img src="/images/tracking2.png" width="500px">
+
+### 5. ToDO
 
 - [ ] DeepSort
 
